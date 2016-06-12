@@ -1,12 +1,11 @@
 ﻿using System;
-using Ensage;
 
+using Ensage;
 using Ensage.Common.Menu;
 using Ensage.Common;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Color_Chat
+
+namespace ChatColorAndEmoticon
 {
     internal class Program
     {
@@ -37,28 +36,30 @@ namespace Color_Chat
         }
         private static char[] Cyrillic = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'Q', 'q', 'R', 'r', 'S', 's', 'T', 't', 'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y', 'Z', 'z' };
         private static char[] Latin = { 'А', 'а', 'Б', 'б', 'Ц', 'ц', 'Д', 'д', 'Е', 'е', 'Ф', 'ф', 'Г', 'г', 'Ч', 'ч', 'И', 'и', 'Й', 'й', 'К', 'к', 'Л', 'л', 'М', 'м', 'Н', 'н', 'О', 'о', 'П', 'п', 'Я', 'я', 'Р', 'р', 'С', 'с', 'Т', 'т', 'У', 'у', 'В', 'в', 'Ш', 'ш', 'Х', 'х', 'Ы', 'ы', 'З', 'з' };
-        
+        private static string[] emo = { "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+        private static string[] code = { ":wink:", ":blush:", ":cheeky:", ":cool:", ":crazy:", ":cry:", ":disapprove:", ":doubledamage:", ":facepalm:", ":happytears:", ":haste:", ":hex:", ":highfive:", ":huh:", ":hush:", ":illusion:", ":invisibility:", ":laugh:", ":rage:", ":regeneration:", ":sad:", ":sick:", ":sleeping:", ":smile:", ":surprise:", ":aaaah:", ":burn:", ":hide:", ":iceburn:", ":tears:", ":techies:", ":fail:", ":goodjob:", ":headshot:", ":heart:", ":horse:", ":grave:", ":ti4copper:", ":ti4bronze:", ":ti4silver:", ":ti4gold:", ":ti4platinum:", ":ti4diamond:", ":dac15_sad:", ":dac15_surprise:", ":dac15_upset:", ":dac15_angry:", ":dac15_embarrass:", ":dac15_fade:", ":dac15_fantastic:", ":dac15_tired:", ":dac15_water:", ":pup:", ":bts_bristle:", ":bts_godz:", ":bts_lina:", ":bts_merlini:", ":bts_rosh:", ":cocky:", ":devil:", ":happy:", ":thinking:", ":tp:", ":salty:", ":angel:", ":blink:", ":snot:", ":stunned:", ":disappear:", ":fire:", ":bountyrune:", ":troll:", ":gross:", ":ggdire:", ":ggradiant:", ":yolo:", ":throwgame:", ":aegis2015:", ":eyeroll:" };
 
         static void Main(string[] args)
         {
-           
+
             Game.OnWndProc += Game_OnGameWndProc;
             var menu_utama = new Menu("Options", "opsi");
-            menu_utama.AddItem(new MenuItem("EnableColor", "EnableColor").SetValue(true));
-            menu_utama.AddItem(new MenuItem("Color", "Color").SetValue(new StringList(new[] { "Olive", "Pink", "Red","Orange","Dark Yellow","Light Green","Purple","Grey","Green","Blue","White","Rainbow","Hot Pink","Vibrant Orange","Violet","Redish Pink" })));
+            menu_utama.AddItem(new MenuItem("EnableAssembly", "EnableAssembly").SetValue(true));
+            menu_utama.AddItem(new MenuItem("Emoticon", "Emoticon").SetValue(true));
+            menu_utama.AddItem(new MenuItem("Color", "Color").SetValue(new StringList(new[] { "Olive", "Pink", "Red", "Orange", "Dark Yellow", "Light Green", "Purple", "Grey", "Green", "Blue", "White", "Rainbow", "Hot Pink", "Vibrant Orange", "Violet", "Redish Pink" })));
             menu_utama.AddItem(new MenuItem("Russia", "Russia").SetValue(true));
             Menu.AddSubMenu(menu_utama);
             Menu.AddToMainMenu();
             Game.PrintMessage("Colored Chat by <font color='#ff1111'>Spyware293</font> Loaded !!", MessageType.LogMessage);
-           
+
 
         }
-        
+
         static string rand()
         {
             int n = _r.Next(15);
-            
-            switch(n)
+
+            switch (n)
             {
                 case 1:
                     modspace = "10";
@@ -107,16 +108,25 @@ namespace Color_Chat
                     break;
             }
             return modspace;
-                
+
+        }
+        public static string Emotikon(string tukaremotikon)
+        {
+            for (int i = 0; i <= emo.Length - 1; i++)
+            {
+                tukaremotikon = tukaremotikon.Replace(code[i], emo[i]);
+            }
+            return tukaremotikon;
         }
         public static string Romanize(string russian)
         {
             bool isnotfound = false;
             foreach (char c in russian)
             {
-                try {
+                try
+                {
                     int a = Array.IndexOf(Cyrillic, c);
-                    russian = russian.Replace(Cyrillic[a],Latin[a] );
+                    russian = russian.Replace(Cyrillic[a], Latin[a]);
                 }
                 catch
                 {
@@ -128,7 +138,7 @@ namespace Color_Chat
         }
         public static void Game_OnGameWndProc(WndEventArgs args)
         {
-            if (Game.IsChatOpen && Menu.Item("EnableColor").GetValue<bool>())
+            if (Game.IsChatOpen && Menu.Item("EnableAssembly").GetValue<bool>())
             {
                 if (args.Msg == 0x0101 && args.WParam == 0x0D)
                 {
@@ -136,7 +146,7 @@ namespace Color_Chat
                     if (Game.IsKeyDown(0x10)) team = false;
                     else team = true;
                 }
-                    if (Menu.Item("Color").GetValue<StringList>().SelectedIndex == (int)color.Olive)
+                if (Menu.Item("Color").GetValue<StringList>().SelectedIndex == (int)color.Olive)
                 {
                     modifier = "10";
                 }
@@ -200,16 +210,21 @@ namespace Color_Chat
                 {
                     modifier = "1C";
                 }
+
                 if (args.Msg == 256)
                 {
                     if (args.WParam == 13)
                     {
-                        
+
                         int hexnum = Int32.Parse(modifier, System.Globalization.NumberStyles.HexNumber);
                         string stringmodifier = Char.ConvertFromUtf32(hexnum);
-                        if (Command =="")
+                        if (Command == "")
                         {
                             return;
+                        }
+                        if (Menu.Item("Emoticon").GetValue<bool>())
+                        {
+                            Command = Emotikon(Command);
                         }
                         if (Menu.Item("Russia").GetValue<bool>())
                         {
@@ -219,7 +234,10 @@ namespace Color_Chat
                         {
                             Command = space(Command);
                         }
-                        Game.ExecuteCommand(((team) ? "say_team " : "say ") + stringmodifier + Command);
+
+                        Game.ExecuteCommand(((team) ? "say_team " : "say ") + stringmodifier + Command);
+
+
                         Command = "";
 
                         return;
@@ -467,14 +485,14 @@ namespace Color_Chat
                     if (Game.IsKeyDown(16))
                     {
                         Command += Utils.KeyToText((uint)args.WParam).ToUpper();
-                        
+
                         return;
-                    }   
+                    }
                     else
                         Command += Utils.KeyToText((uint)args.WParam).ToLower();
-                    
 
-                        
+
+
                     return;
 
 
@@ -486,7 +504,7 @@ namespace Color_Chat
         {
             char[] array = Command.ToCharArray();
             Command = "";
-            for (int i = 0;i<array.Length;i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == ' ')
                 {
@@ -494,7 +512,7 @@ namespace Color_Chat
                     int hexnum = Int32.Parse(modifiers, System.Globalization.NumberStyles.HexNumber);
                     string stringmodifier = char.ConvertFromUtf32(hexnum);
                     Command += array[i] + stringmodifier;
-                 
+
                 }
                 else
                 {
@@ -505,4 +523,5 @@ namespace Color_Chat
         }
     }
 }
+
 
