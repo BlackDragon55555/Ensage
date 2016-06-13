@@ -188,7 +188,7 @@ namespace ChatColorAndEmoticon
                 }
                 if (Menu.Item("Color").GetValue<StringList>().SelectedIndex == (int)color.White)
                 {
-                    modifier = "0B";
+                    modifier = "01";
                 }
                 if (Menu.Item("Color").GetValue<StringList>().SelectedIndex == (int)color.Rainbow)
                 {
@@ -215,9 +215,9 @@ namespace ChatColorAndEmoticon
                 {
                     if (args.WParam == 13)
                     {
-
-                        int hexnum = Int32.Parse(modifier, System.Globalization.NumberStyles.HexNumber);
-                        string stringmodifier = Char.ConvertFromUtf32(hexnum);
+                            int hexnum = Int32.Parse(modifier, System.Globalization.NumberStyles.HexNumber);
+                            string stringmodifier = Char.ConvertFromUtf32(hexnum);
+                       
                         if (Command == "")
                         {
                             return;
