@@ -188,7 +188,7 @@ namespace ChatColorAndEmoticon
                 }
                 if (Menu.Item("Color").GetValue<StringList>().SelectedIndex == (int)color.White)
                 {
-                    modifier = "";
+                    modifier = "0B";
                 }
                 if (Menu.Item("Color").GetValue<StringList>().SelectedIndex == (int)color.Rainbow)
                 {
