@@ -4,13 +4,14 @@ using Ensage;
 using Ensage.Common.Extensions;
 using Ensage.Common;
 using Ensage.Common.Menu;
+using System.Threading;
 
 namespace SvenSpyware
 {
     internal class Program
     {
         private static Ability stun, armor, ulti;
-        private static Item Lompat, armlet, mjollnir, mom, medallion, solar, soulRing, dust, bladeMail, bkb, abyssal;
+        private static Item Lompat, armlet, mjollnir, mom, medallion, solar, soulRing, dust, bladeMail, bkb, abyssal,bloodthorn;
         private static readonly Menu Menu = new Menu("SvenRampage", "SvenRampage", true, "npc_dota_hero_sven", true);
         private static Hero me, target;
         private static bool combo;
@@ -20,6 +21,7 @@ namespace SvenSpyware
             Game.OnWndProc += Game_OnWndProc;
             var menu_utama = new Menu("Options", "opsi");
             menu_utama.AddItem(new MenuItem("enable", "enable").SetValue(true));
+            menu_utama.AddItem(new MenuItem("ComboKey", "ComboKey").SetValue(new KeyBind('g', KeyBindType.Press)));
             menu_utama.AddItem(new MenuItem("useBKB", "useBKB").SetValue(true));
             Menu.AddSubMenu(menu_utama);
             Menu.AddToMainMenu();
@@ -47,6 +49,8 @@ namespace SvenSpyware
 
             if (Lompat == null)
                 Lompat = me.FindItem("item_blink");
+            if (bloodthorn == null)
+                bloodthorn = me.FindItem("item_bloodthorn");
             if (armlet == null)
                 armlet = me.FindItem("item_armlet");
             if (mjollnir == null)
@@ -84,6 +88,11 @@ namespace SvenSpyware
                         {
                             bladeMail.UseAbility();
                             Utils.Sleep(150 + Game.Ping, "blademail");
+                        }
+                        if (bloodthorn != null && bloodthorn.CanBeCasted() && Utils.SleepCheck("bloodthorn"))
+                        {
+                            bloodthorn.UseAbility(target);
+                            Utils.Sleep(150 + Game.Ping, "bloodthorn");
                         }
                         if (mom != null && mom.CanBeCasted() && Utils.SleepCheck("mom"))
                         {
@@ -200,9 +209,10 @@ namespace SvenSpyware
         {
             if (!Game.IsChatOpen)
             {
-                if (Game.IsKeyDown(32))
+                if (args.WParam == Menu.Item("ComboKey").GetValue<KeyBind>().Key)
                 {
                     combo = true;
+  
                 }
                 else
                 {
