@@ -1,5 +1,7 @@
-﻿using Ensage;
+﻿using System;
+using Ensage;
 using Ensage.Common.Menu;
+using SharpDX;
 
 namespace TeamInformer
 {
@@ -12,7 +14,25 @@ namespace TeamInformer
             teaminformer.AddItem(new MenuItem("print", "PrintMessage" ).SetValue(true));
             teaminformer.AddToMainMenu();
             Entity.OnParticleEffectAdded += ParticleDetector;
+            Hero.OnModifierAdded += ModifierDetector;
+
         }
+
+        private static void ModifierDetector(Unit sender, ModifierChangedEventArgs args)
+        {
+            if (args.Modifier.Name.Contains("charge_of_darkness_vision") && args.Modifier.Owner.UnitType == 1 && !args.Modifier.Owner.IsIllusion && args.Modifier.Owner.Team == ObjectManager.LocalHero.Team)
+            {
+                if (teaminformer.Item("tell").GetValue<bool>())
+                {
+                    Game.ExecuteCommand("say_team "+ args.Modifier.Owner.Name.Replace("npc_dota_hero_", "").Replace("_", " ") + " Charged");
+                }
+                if (teaminformer.Item("print").GetValue<bool>())
+                {
+                    Game.PrintMessage(args.Modifier.Owner.Name.Replace("npc_dota_hero_", "").Replace("_"," ") + " Charged",MessageType.ChatMessage);
+                }
+            }
+        }
+
         private static async void ParticleDetector (Entity entity, ParticleEffectAddedEventArgs effect)
         {
             if (effect.Name.Contains("smoke_of_deceit"))
