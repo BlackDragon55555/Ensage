@@ -35,6 +35,7 @@ namespace TeamInformer
 
         private static async void ParticleDetector (Entity entity, ParticleEffectAddedEventArgs effect)
         {
+		    Game.PrintMessage(effect.Name, MessageType.ChatMessage);
             if (effect.Name.Contains("smoke_of_deceit"))
             {
                 if (teaminformer.Item("tell").GetValue<bool>())
