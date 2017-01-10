@@ -1,7 +1,5 @@
-﻿using System;
-using Ensage;
+﻿using Ensage;
 using Ensage.Common.Menu;
-using SharpDX;
 
 namespace TeamInformer
 {
@@ -33,7 +31,7 @@ namespace TeamInformer
             }
         }
 
-        private static async void ParticleDetector (Entity entity, ParticleEffectAddedEventArgs effect)
+        private static void ParticleDetector (Entity entity, ParticleEffectAddedEventArgs effect)
         {
 
             Game.PrintMessage(effect.Name, MessageType.ChatMessage);
