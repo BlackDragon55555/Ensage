@@ -21,7 +21,7 @@ namespace Bristleback_Sharp
         {
             Game.OnUpdate += Game_OnUpdate;
             Game.OnWndProc += Game_OnWndProc;
-            Game.PrintMessage("Bristleback Sharp by <font color='#ff1111'>Spyware293</font> Loaded !!", MessageType.LogMessage);
+            Game.PrintMessage("BristlebackSharp by <font color='#ff1111'>Spyware293</font> Loaded !!", MessageType.LogMessage);
             var menu_utama = new Menu("Options", "opsi");
             menu_utama.AddItem(new MenuItem("Quill", "Quill").SetValue(new StringList(new[] { "Max", "Smart", "Disable","Farm" })));
             menu_utama.AddItem(new MenuItem("enable", "enable").SetValue(true));
