@@ -37,16 +37,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ensage">
-      <HintPath>D:\Doto Chet\LeagueSharp\System\Ensage.dll</HintPath>
+      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\Ensage.dll</HintPath>
     </Reference>
     <Reference Include="Ensage.Common">
-      <HintPath>D:\Doto Chet\LeagueSharp\System\Ensage.Common.dll</HintPath>
+      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\Ensage.Common.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>D:\Doto Chet\LeagueSharp\System\SharpDX.dll</HintPath>
+      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
-      <HintPath>D:\Doto Chet\LeagueSharp\System\SharpDX.Direct3D9.dll</HintPath>
+      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\SharpDX.Direct3D9.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

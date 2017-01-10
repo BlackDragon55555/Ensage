@@ -5,7 +5,6 @@ using Ensage.Common;
 using Ensage.Common.Extensions;
 using Ensage.Common.Menu;
 using SharpDX;
-using System.Windows.Input;
 
 namespace Bristleback_Sharp
 {
@@ -48,7 +47,7 @@ namespace Bristleback_Sharp
         }
         public static void Game_OnUpdate(EventArgs args)
         {
-            _source = ObjectMgr.LocalHero;
+            _source = ObjectManager.LocalHero;
            
             if (!Game.IsInGame||Game.IsPaused||Game.IsWatchingGame)
             {
@@ -58,8 +57,8 @@ namespace Bristleback_Sharp
             {
                 return;
             }
-            var _enemy = ObjectMgr.GetEntities<Hero>().Where(hero => hero.IsAlive && !hero.IsIllusion && hero.IsVisible && hero.Team != _source.Team);
-            var _creep = ObjectMgr.GetEntities<Creep>().Where(x => (x.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || x.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && x.IsAlive && x.IsSpawned && x.IsVisible).ToList();
+            var _enemy = ObjectManager.GetEntities<Hero>().Where(hero => hero.IsAlive && !hero.IsIllusion && hero.IsVisible && hero.Team != _source.Team);
+            var _creep = ObjectManager.GetEntities<Creep>().Where(x => (x.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || x.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && x.IsAlive && x.IsSpawned && x.IsVisible).ToList();
             if (_source == null)
             {
                 return;
@@ -169,11 +168,12 @@ namespace Bristleback_Sharp
                                 Goo.UseAbility();
                                 Utils.Sleep(150 + Game.Ping, "Goo");
                             }
-			    else
-			    {	
-                                 _source.Attack(_target);
-                                 Utils.Sleep(Game.Ping + 150, "atk");
-		            }
+                            else
+                            {
+                                _source.Attack(_target);
+                                Utils.Sleep(Game.Ping + 150, "atk");
+                            }
+			   
 
                         }
                         else
