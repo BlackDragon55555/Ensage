@@ -169,6 +169,11 @@ namespace Bristleback_Sharp
                                 Goo.UseAbility();
                                 Utils.Sleep(150 + Game.Ping, "Goo");
                             }
+			    else
+			    {	
+                                 _source.Attack(_target);
+                                 Utils.Sleep(Game.Ping + 150, "atk");
+		            }
 
                         }
                         else
