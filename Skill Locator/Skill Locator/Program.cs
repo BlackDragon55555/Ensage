@@ -34,9 +34,19 @@ namespace Skill_Locator
                 });
             ObjectManager.OnAddEntity += Skill_entity;
             Drawing.OnEndScene += draw;
-            
+            Drawing.OnPreReset += Drawing_OnPreReset;
+            Drawing.OnPostReset += Drawing_OnPostReset;
+
+        }
+        static void Drawing_OnPostReset(EventArgs args)
+        {
+            font.OnResetDevice();
         }
 
+        static void Drawing_OnPreReset(EventArgs args)
+        {
+            font.OnLostDevice();
+        }
         private static async void draw(EventArgs args)
         {
             //  
