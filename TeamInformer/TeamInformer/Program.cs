@@ -46,7 +46,7 @@ namespace TeamInformer
                     Game.PrintMessage("Smoke Detected", MessageType.ChatMessage);
                 }
             }
-            else if (effect.Name.Contains("mirana_moonlight_cast"))
+            else if (effect.Name.Contains("mirana_moonlight_cast") && effect.ParticleEffect.Owner.Team != ObjectManager.LocalHero.Team)
             {
                 if (teaminformer.Item("tell").GetValue<bool>())
                 {
@@ -57,7 +57,7 @@ namespace TeamInformer
                     Game.PrintMessage("Moonlight Detected", MessageType.ChatMessage);
                 }
             }
-            else if (effect.Name.Contains("sandking_epicenter_tell"))
+            else if (effect.Name.Contains("sandking_epicenter_tell") && effect.ParticleEffect.Owner.Team != ObjectManager.LocalHero.Team)
             {
                 if (teaminformer.Item("tell").GetValue<bool>())
                 {
