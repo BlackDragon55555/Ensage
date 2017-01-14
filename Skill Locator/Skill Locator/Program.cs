@@ -28,16 +28,17 @@ namespace Skill_Locator
             {"Gray",Color.Gray },
             {"Light Blue",Color.LightBlue },
             {"Green",Color.Green },
-            {"Brown",Color.Brown }
+            {"Brown",Color.Brown },
+            {"Red", Color.Red }
         };
-        public static List<Vector2> Pos
-        {
-            get { return pos; }
-            set { pos = value; }
-        }
+      //  public static List<Vector2> Pos
+       // {
+        //    get { return pos; }
+         //   set { pos = value; }
+       // }
         static void Main(string[] args)
         {
-            Menu.AddItem(new MenuItem("color", "Marker Color").SetValue(new StringList(new[] { "Blue", "Teal", "Purple", "Yellow","Orange","Pink","Gray","Light Blue","Green","Brown" })));
+            Menu.AddItem(new MenuItem("color", "Marker Color").SetValue(new StringList(new[] { "Blue", "Teal", "Purple", "Yellow","Orange","Pink","Gray","Light Blue","Green","Brown","Red" })));
             Menu.AddItem(new MenuItem("delay", "Delay before mark gone").SetValue(new Slider(2000, 1000, 5000)));
             Menu.AddToMainMenu();
             font = new Font(
@@ -66,7 +67,7 @@ namespace Skill_Locator
             //  
             try
             {
-                foreach (Vector2 position in Pos.ToList())
+                foreach (Vector2 position in pos.ToList())
                 {
                     
                     font.DrawText(null, "+", (int)position.X - 13, (int)position.Y - 10, colorselect[Menu.Item("color").GetValue<StringList>().SelectedValue]);
@@ -78,10 +79,14 @@ namespace Skill_Locator
                 Console.WriteLine("Error Drawing Text");
             }
         }
-        private static async void remover ()
+        private static async void remover (Vector2 val)
         {
             await Task.Delay(Menu.Item("delay").GetValue<Slider>().Value);
-            Pos.RemoveAt(0);
+            pos.RemoveAt(0);
+            if (pos.Contains(val))
+            {
+                pos.Remove(val);
+            }
         }
 
         private static void Skill_entity(EntityEventArgs args)
@@ -92,16 +97,16 @@ namespace Skill_Locator
                 {
                    // Game.PrintMessage(args.Entity.Name + " " + args.Entity.NetworkName + " " + args.En);
                     minimap_pos2d = HUDInfo.WorldToMinimap(args.Entity.NetworkPosition);
-                    Pos.Add(minimap_pos2d);
+                    pos.Add(minimap_pos2d);
                     //  Game.PrintMessage(minimap_pos2d.X + " " + minimap_pos2d.Y);
-                    remover();
+                    remover(minimap_pos2d);
                 }
             }
             catch
             {
                 minimap_pos2d = HUDInfo.WorldToMinimap(args.Entity.NetworkPosition);
-                Pos.Add(minimap_pos2d);
-                remover();
+                pos.Add(minimap_pos2d);
+                remover(minimap_pos2d);
             }            
         }
     }
