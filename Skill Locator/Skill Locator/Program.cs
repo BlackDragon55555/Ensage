@@ -105,18 +105,32 @@ namespace Skill_Locator
             {
                 if (!args.Entity.Name.Contains("npc_dota_creep") && !args.Entity.Name.Contains("npc_dota_neutral") && !args.Entity.Name.Contains("npc_dota_badguys") && !args.Entity.Name.Contains("npc_dota_goodguys") && !args.Entity.Name.Contains("dota_scene_entity") && !args.Entity.Name.Contains("point_hmd") && !args.Entity.Name.Contains("dota_item") && !args.Entity.Name.Contains("ent_dota_tree") && !args.Entity.Name.Contains("dota_world") && !args.Entity.Name.Contains("ambient_") && args.Entity.NetworkPosition.X != 0 && !args.Entity.Name.Contains("npc_dota_hero_") && !args.Entity.Name.Contains("effigy") && !args.Entity.Name.Contains("prop_dynamic") && !args.Entity.Name.Contains("world_layer") && !args.Entity.NetworkName.Contains("Spawner") && !args.Entity.Name.Contains("dota_shop") && !args.Entity.Name.Contains("fountain") && !args.Entity.Name.Contains("halloffame") && !args.Entity.Name.Contains("info_player") && !args.Entity.Name.Contains("info_particle") && !args.Entity.Name.Contains("Camera") && !args.Entity.Name.Contains("tonemap") && args.Entity.NetworkName != "CDOTAPlayer" && !args.Entity.Owner.IsVisible)
                 {
-                   // Game.PrintMessage(args.Entity.Name + " " + args.Entity.NetworkName + " " + args.En);
+                    //Game.PrintMessage(args.Entity.Name + " " + args.Entity.NetworkName);
                     minimap_pos2d = HUDInfo.WorldToMinimap(args.Entity.NetworkPosition);
                     pos.Add(minimap_pos2d);
-                    //  Game.PrintMessage(minimap_pos2d.X + " " + minimap_pos2d.Y);
+                    //Game.PrintMessage(minimap_pos2d.X + " " + minimap_pos2d.Y);
                     remover(minimap_pos2d);
                 }
             }
             catch
             {
-                minimap_pos2d = HUDInfo.WorldToMinimap(args.Entity.NetworkPosition);
-                pos.Add(minimap_pos2d);
-                remover(minimap_pos2d);
+                try
+                {
+                    if (!args.Entity.Name.Contains("Item_Physical") && args.Entity.Team != ObjectManager.LocalHero.Team)
+                    {
+                       // Game.PrintMessage("exception " + args.Entity.Name + " " + args.Entity.Team +args.Entity.IsVisibleForTeam(ObjectManager.LocalHero.Team));
+                        minimap_pos2d = HUDInfo.WorldToMinimap(args.Entity.NetworkPosition);
+                        pos.Add(minimap_pos2d);
+                        remover(minimap_pos2d);
+                    }
+                }
+                catch
+                {
+                   // Game.PrintMessage("exception2 " + args.Entity.Name);
+                    minimap_pos2d = HUDInfo.WorldToMinimap(args.Entity.NetworkPosition);
+                    pos.Add(minimap_pos2d);
+                    remover(minimap_pos2d);
+                }
             }            
         }
     }
