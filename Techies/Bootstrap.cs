@@ -18,7 +18,11 @@
         public Bootstrap()
         {
             var hero = ObjectManager.LocalHero;
-           
+            if (hero.ClassID != ClassID.CDOTA_Unit_Hero_Techies)
+            {
+                Variables.Instance = null;
+                return;
+            }
 
             Variables.Techies = hero;
 

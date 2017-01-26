@@ -60,19 +60,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ensage, Version=0.0.0.1, Culture=neutral, PublicKeyToken=a41ba14f653257a6, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Doto Chet\VAC\References\Ensage.dll</HintPath>
+    <Reference Include="Ensage">
+      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\Ensage.dll</HintPath>
     </Reference>
-    <Reference Include="Ensage.Common, Version=1.2.2.8, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Doto Chet\VAC\References\Ensage.Common.dll</HintPath>
+    <Reference Include="Ensage.Common">
+      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\Ensage.Common.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>D:\Doto Chet\VAC\References\SharpDX.dll</HintPath>
+      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
-      <HintPath>D:\Doto Chet\VAC\References\SharpDX.Direct3D9.dll</HintPath>
+      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\SharpDX.Direct3D9.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />

@@ -77,7 +77,11 @@
         private static void Events_OnLoad(object sender, EventArgs e)
         {
             var hero = ObjectManager.LocalHero;
-			
+            if (hero.ClassID != ClassID.CDOTA_Unit_Hero_Techies)
+            {
+                Variables.Instance = null;
+                return;
+            }
 
             Variables.Instance = new Bootstrap();
         }

@@ -26,6 +26,7 @@
             detonationMenu.AddItem(
                 new MenuItem("autoDetonateProtection", "Detonate when enemy tries to destroy").SetValue(true)
                     .SetTooltip("Detonates mine when enemy tries to kill it with auto attack or item"));
+            detonationMenu.AddItem(new MenuItem("autoDetonateAegis", "Detonate on Aegis / Reincarnation").SetValue(false));
             detonationMenu.AddItem(new MenuItem("detonateAllMines", "Detonate all mines in stack").SetValue(false))
                 .SetTooltip(
                     "Instead of detonating only needed amount of mines, assembly will detonate all mines in stack");

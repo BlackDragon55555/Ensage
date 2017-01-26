@@ -40,6 +40,11 @@
             return Variables.Menu.DetonationMenu.Item("autoDetonate").GetValue<bool>();
         }
 
+        public bool KillAegis()
+        {
+            return Variables.Menu.DetonationMenu.Item("autoDetonateAegis").GetValue<bool>();
+        }
+
         /// <summary>
         ///     The can draw.
         /// </summary>
@@ -73,6 +78,16 @@
         /// </returns>
         public bool Execute(Hero hero)
         {
+            bool cankill;
+            if (Variables.Menu.DetonationMenu.Item("autoDetonateAegis").GetValue<bool>())
+            {
+                cankill = true;
+            }
+            else
+            {
+                cankill = hero.CanDie();
+            }
+          
             if ((Variables.Instance.Techies.EnabledHeroes.ContainsKey(hero.ClassID)
                  && !Variables.Instance.Techies.EnabledHeroes[hero.ClassID]) || hero.IsInvul() || hero.IsMagicImmune()
                 || hero.HasModifiers(
@@ -81,7 +96,7 @@
                             "modifier_juggernaut_blade_fury", 
                             "modifier_ember_spirit_sleight_of_fist_caster_invulnerability"
                         }, 
-                    false) || !hero.CanDie())
+                    false) || !cankill)
             {
                 return false;
             }
