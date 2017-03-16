@@ -1,15 +1,19 @@
 ﻿using Ensage;
 using Ensage.Common.Menu;
+using System.Collections.Generic;
 
 namespace TeamInformer
 {
     class Program
     {
         private static readonly Menu teaminformer = new Menu("TeamInformer", "menu", true);
+       
         static void Main(string[] args)
         {
-            teaminformer.AddItem(new MenuItem("tell","Inform Team" ).SetValue(true));
+            
+            teaminformer.AddItem(new MenuItem("tell","Inform Team" ).SetValue(false));
             teaminformer.AddItem(new MenuItem("print", "PrintMessage" ).SetValue(true));
+            teaminformer.AddItem(new MenuItem("humanizer", "humanizer").SetValue(true));
             teaminformer.AddToMainMenu();
             Entity.OnParticleEffectAdded += ParticleDetector;
             Hero.OnModifierAdded += ModifierDetector;
@@ -20,9 +24,17 @@ namespace TeamInformer
         {
             if (args.Modifier.Name.Contains("charge_of_darkness_vision") && args.Modifier.Owner.UnitType == 1 && !args.Modifier.Owner.IsIllusion && args.Modifier.Owner.Team == ObjectManager.LocalHero.Team)
             {
+                
                 if (teaminformer.Item("tell").GetValue<bool>())
                 {
-                    Game.ExecuteCommand("say_team "+ args.Modifier.Owner.Name.Replace("npc_dota_hero_", "").Replace("_", " ") + " Charged");
+                    if (teaminformer.Item("humanizer").GetValue<bool>())
+                    {
+                        humanizer("Charge",args.Modifier.Owner.Name.Replace("npc_dota_hero_", "").Replace("_", " "));
+                    }
+                    else
+                    {
+                        Game.ExecuteCommand("say_team " + args.Modifier.Owner.Name.Replace("npc_dota_hero_", "").Replace("_", " ") + " Charged");
+                    }
                 }
                 if (teaminformer.Item("print").GetValue<bool>())
                 {
@@ -30,7 +42,20 @@ namespace TeamInformer
                 }
             }
         }
-
+        private static void humanizer (string say, string target)
+        {
+            string[] humanwords = {
+            "Enemy is using",
+            "Careful,",
+            "",
+            "Care",
+            "I Think they use"
+            };
+            System.Random humanizer = new System.Random();
+            int words = humanizer.Next(0,humanwords.Length);
+            string targetcharge = (target.Length <= 0 ? " to" + target : "");
+            Game.ExecuteCommand("say_team " + humanwords[words] + " " + say + targetcharge);
+        }
         private static void ParticleDetector (Entity entity, ParticleEffectAddedEventArgs effect)
         {
 
@@ -39,7 +64,14 @@ namespace TeamInformer
             {
                 if (teaminformer.Item("tell").GetValue<bool>())
                 {
-                    Game.ExecuteCommand("say_team Smoke Detected");
+                    if (teaminformer.Item("humanizer").GetValue<bool>())
+                    {
+                        humanizer("Smoke","");
+                    }
+                    else
+                    {
+                        Game.ExecuteCommand("say_team Smoke Detected");
+                    }
                 }
                 if (teaminformer.Item("print").GetValue<bool>())
                 {
@@ -50,7 +82,14 @@ namespace TeamInformer
             {
                 if (teaminformer.Item("tell").GetValue<bool>())
                 {
-                    Game.ExecuteCommand("say_team Moonlight Detected");
+                    if (teaminformer.Item("humanizer").GetValue<bool>())
+                    {
+                        humanizer("Moonlight","");
+                    }
+                    else
+                    {
+                        Game.ExecuteCommand("say_team Moonlight Detected");
+                    }
                 }
                 if (teaminformer.Item("print").GetValue<bool>())
                 {
@@ -61,7 +100,14 @@ namespace TeamInformer
             {
                 if (teaminformer.Item("tell").GetValue<bool>())
                 {
-                    Game.ExecuteCommand("say_team Epicenter Detected");
+                    if (teaminformer.Item("humanizer").GetValue<bool>())
+                    {
+                        humanizer("Epicenter","");
+                    }
+                    else
+                    {
+                        Game.ExecuteCommand("say_team Epicenter Detected");
+                    }
                 }
                 if (teaminformer.Item("print").GetValue<bool>())
                 {
