@@ -53,7 +53,7 @@ namespace TeamInformer
             };
             System.Random humanizer = new System.Random();
             int words = humanizer.Next(0,humanwords.Length);
-            string targetcharge = (target.Length <= 0 ? " to" + target : "");
+            string targetcharge = (target.Length > 0 ? " to " + target : "");
             Game.ExecuteCommand("say_team " + humanwords[words] + " " + say + targetcharge);
         }
         private static void ParticleDetector (Entity entity, ParticleEffectAddedEventArgs effect)
