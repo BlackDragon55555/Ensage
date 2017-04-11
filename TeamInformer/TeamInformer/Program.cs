@@ -1,6 +1,5 @@
 ﻿using Ensage;
 using Ensage.Common.Menu;
-using System.Collections.Generic;
 
 namespace TeamInformer
 {
@@ -38,13 +37,13 @@ namespace TeamInformer
                 }
                 if (teaminformer.Item("print").GetValue<bool>())
                 {
-                    Game.PrintMessage(args.Modifier.Owner.Name.Replace("npc_dota_hero_", "").Replace("_"," ") + " Charged",MessageType.ChatMessage);
+                    Game.PrintMessage(args.Modifier.Owner.Name.Replace("npc_dota_hero_", "").Replace("_"," ") + " Charged");
                 }
             }
         }
         private static void humanizer (string say, string target)
         {
-            string[] humanwords = {
+            string[] humanword = {
             "Enemy is using",
             "Careful,",
             "",
@@ -52,9 +51,9 @@ namespace TeamInformer
             "I Think they use"
             };
             System.Random humanizer = new System.Random();
-            int words = humanizer.Next(0,humanwords.Length);
+            int words = humanizer.Next(0,humanword.Length);
             string targetcharge = (target.Length > 0 ? " to " + target : "");
-            Game.ExecuteCommand("say_team " + humanwords[words] + " " + say + targetcharge);
+            Game.ExecuteCommand("say_team " + humanword[words] + " " + say + targetcharge);
         }
         private static void ParticleDetector (Entity entity, ParticleEffectAddedEventArgs effect)
         {
@@ -75,7 +74,7 @@ namespace TeamInformer
                 }
                 if (teaminformer.Item("print").GetValue<bool>())
                 {
-                    Game.PrintMessage("Smoke Detected", MessageType.ChatMessage);
+                    Game.PrintMessage("Smoke Detected");
                 }
             }
             else if (effect.Name.Contains("mirana_moonlight_cast") && effect.ParticleEffect.Owner.Team != ObjectManager.LocalHero.Team)
@@ -93,7 +92,7 @@ namespace TeamInformer
                 }
                 if (teaminformer.Item("print").GetValue<bool>())
                 {
-                    Game.PrintMessage("Moonlight Detected", MessageType.ChatMessage);
+                    Game.PrintMessage("Moonlight Detected");
                 }
             }
             else if (effect.Name.Contains("sandking_epicenter_tell") && effect.ParticleEffect.Owner.Team != ObjectManager.LocalHero.Team)
@@ -111,7 +110,7 @@ namespace TeamInformer
                 }
                 if (teaminformer.Item("print").GetValue<bool>())
                 {
-                    Game.PrintMessage("Epicenter Detected", MessageType.ChatMessage);
+                    Game.PrintMessage("Epicenter Detected");
                 }
             }
         }
