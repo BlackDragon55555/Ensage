@@ -45,25 +45,25 @@ namespace VisibleByEnemyDraw
 
         private static void Game_OnDraw(EventArgs args)
         {
-            var player = ObjectMgr.LocalPlayer;
+            var player = ObjectManager.LocalPlayer;
             if (player == null || player.Team == Team.Observer)
                 return;
             
-            var units = ObjectMgr.GetEntities<Unit>().Where(
+            var units = ObjectManager.GetEntities<Unit>().Where(
                 x =>
              
                 (Menu.Item("heroes").GetValue<bool>() && x is Hero && x.Team == player.Team)
              
                 || (Menu.Item("wards").GetValue<bool>()
-                    && (x.ClassID == ClassID.CDOTA_NPC_Observer_Ward
-                        || x.ClassID == ClassID.CDOTA_NPC_Observer_Ward_TrueSight) && x.Team == player.Team)
+                    && (x.ClassId == ClassId.CDOTA_NPC_Observer_Ward
+                        || x.ClassId == ClassId.CDOTA_NPC_Observer_Ward_TrueSight) && x.Team == player.Team)
                
-                || (Menu.Item("mines").GetValue<bool>() && x.ClassID == ClassID.CDOTA_NPC_TechiesMines
+                || (Menu.Item("mines").GetValue<bool>() && x.ClassId == ClassId.CDOTA_NPC_TechiesMines
                     && x.Team == player.Team)
                 
-                || (Menu.Item("units").GetValue<bool>() && !(x is Hero) && !(x is Building) && x.ClassID != ClassID.CDOTA_BaseNPC_Creep_Lane
-                    && x.ClassID != ClassID.CDOTA_NPC_TechiesMines && x.ClassID != ClassID.CDOTA_NPC_Observer_Ward
-                    && x.ClassID != ClassID.CDOTA_NPC_Observer_Ward_TrueSight && x.Team == player.Team)
+                || (Menu.Item("units").GetValue<bool>() && !(x is Hero) && !(x is Building) && x.ClassId != ClassId.CDOTA_BaseNPC_Creep_Lane
+                    && x.ClassId != ClassId.CDOTA_NPC_TechiesMines && x.ClassId != ClassId.CDOTA_NPC_Observer_Ward
+                    && x.ClassId != ClassId.CDOTA_NPC_Observer_Ward_TrueSight && x.Team == player.Team)
                 
                 || (Menu.Item("buildings").GetValue<bool>() && x is Building && x.Team == player.Team)).ToList();
 
