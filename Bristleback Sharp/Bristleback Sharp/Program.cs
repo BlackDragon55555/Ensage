@@ -20,7 +20,7 @@ namespace Bristleback_Sharp
         {
             Game.OnUpdate += Game_OnUpdate;
             Game.OnWndProc += Game_OnWndProc;
-            Game.PrintMessage("BristlebackSharp by <font color='#ff1111'>Spyware293</font> Loaded !!", MessageType.LogMessage);
+            Game.PrintMessage("BristlebackSharp by <font color='#ff1111'>Spyware293</font> Loaded !!");
             var menu_utama = new Menu("Options", "opsi");
             menu_utama.AddItem(new MenuItem("Quill", "Quill").SetValue(new StringList(new[] { "Max", "Smart", "Disable","Farm" })));
             menu_utama.AddItem(new MenuItem("enable", "enable").SetValue(true));
@@ -53,12 +53,12 @@ namespace Bristleback_Sharp
             {
                 return;
             }
-            if (_source.ClassID != ClassID.CDOTA_Unit_Hero_Bristleback)
+            if (_source.ClassId != ClassId.CDOTA_Unit_Hero_Bristleback)
             {
                 return;
             }
             var _enemy = ObjectManager.GetEntities<Hero>().Where(hero => hero.IsAlive && !hero.IsIllusion && hero.IsVisible && hero.Team != _source.Team);
-            var _creep = ObjectManager.GetEntities<Creep>().Where(x => (x.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || x.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && x.IsAlive && x.IsSpawned && x.IsVisible).ToList();
+            var _creep = ObjectManager.GetEntities<Creep>().Where(x => (x.ClassId == ClassId.CDOTA_BaseNPC_Creep_Lane || x.ClassId == ClassId.CDOTA_BaseNPC_Creep_Siege) && x.IsAlive && x.IsSpawned && x.IsVisible).ToList();
             if (_source == null)
             {
                 return;
@@ -161,7 +161,7 @@ namespace Bristleback_Sharp
                     }
                     if (Goo.CanBeCasted() && _source.CanAttack() && !_target.IsInvul() && Utils.SleepCheck("Goo"))
                     {
-                        if (_source.HasItem(ClassID.CDOTA_Item_UltimateScepter))
+                        if (_source.HasItem(ClassId.CDOTA_Item_UltimateScepter))
                         {
                             if (GetDistance2D(_target.Position, _source.Position) < Goo.CastRange)
                             {
