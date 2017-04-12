@@ -33,18 +33,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ensage">
-      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\Ensage.dll</HintPath>
+    <Reference Include="Ensage, Version=0.0.0.1, Culture=neutral, PublicKeyToken=a41ba14f653257a6, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Doto Chet\EnsageRelaunch\References\Ensage.dll</HintPath>
     </Reference>
-    <Reference Include="Ensage.Common">
-      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\Ensage.Common.dll</HintPath>
+    <Reference Include="Ensage.Common, Version=1.2.6.1, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Doto Chet\EnsageRelaunch\References\Ensage.Common.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX">
-      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\SharpDX.dll</HintPath>
+    <Reference Include="SharpDX, Version=2.6.3.0, Culture=neutral, PublicKeyToken=345b829e6e492981, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Doto Chet\EnsageRelaunch\References\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1">
+      <HintPath>D:\Doto Chet\EnsageRelaunch\References\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>D:\Doto Chet\EnsageRelaunch\References\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D9, Version=2.6.3.0, Culture=neutral, PublicKeyToken=345b829e6e492981, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Doto Chet\zq9eWaVnZ Asli\References\SharpDX.Direct3D9.dll</HintPath>
+      <HintPath>D:\Doto Chet\EnsageRelaunch\References\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>D:\Doto Chet\EnsageRelaunch\References\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics">
+      <HintPath>D:\Doto Chet\EnsageRelaunch\References\SharpDX.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
