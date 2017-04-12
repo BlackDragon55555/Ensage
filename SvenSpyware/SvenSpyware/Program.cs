@@ -29,12 +29,12 @@ namespace SvenSpyware
 
         public static void Game_OnUpdate(EventArgs args)
         {
-            me = ObjectMgr.LocalHero;
+            me = ObjectManager.LocalHero;
 
             if (!Game.IsInGame || Game.IsPaused || Game.IsWatchingGame)
                 return;
 
-            if (me.ClassID != ClassID.CDOTA_Unit_Hero_Sven)
+            if (me.ClassId != ClassId.CDOTA_Unit_Hero_Sven)
                 return;
 
             if (me == null)
