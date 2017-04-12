@@ -39,12 +39,12 @@ namespace AntiMage_Spyware
         public static void Game_OnUpdate(EventArgs args)
         {
            
-            me = ObjectMgr.LocalHero;
-            var targets = ObjectMgr.GetEntities<Hero>().Where(enemy => enemy.Team == me.GetEnemyTeam() && !enemy.IsIllusion() && enemy.IsVisible && enemy.IsAlive && enemy.Health > 0).ToList();
+            me = ObjectManager.LocalHero;
+            var targets = ObjectManager.GetEntities<Hero>().Where(enemy => enemy.Team == me.GetEnemyTeam() && !enemy.IsIllusion() && enemy.IsVisible && enemy.IsAlive && enemy.Health > 0).ToList();
             if (!Game.IsInGame || Game.IsPaused || Game.IsWatchingGame)
                 return;
 
-            if (me.ClassID != ClassID.CDOTA_Unit_Hero_AntiMage)
+            if (me.ClassId != ClassId.CDOTA_Unit_Hero_AntiMage)
                 return;
 
             if (me == null)
@@ -115,7 +115,7 @@ namespace AntiMage_Spyware
                 Utils.Sleep(150 + Game.Ping, "manta");
             }
 
-            var illus = ObjectMgr.GetEntities<Hero>().Where(x => x.IsAlive && x.IsControllable && x.Team == me.Team && x.IsIllusion && x.Modifiers.Any(y => y.Name != "modifier_kill")).ToList();
+            var illus = ObjectManager.GetEntities<Hero>().Where(x => x.IsAlive && x.IsControllable && x.Team == me.Team && x.IsIllusion && x.Modifiers.Any(y => y.Name != "modifier_kill")).ToList();
             
             if (Menu.Item("Illusion").GetValue<bool>())
             {
