@@ -13,33 +13,21 @@ namespace Bristleback_Sharp
         private static Ability Quill, Goo;
         private static Hero _source, _target;
         private static Item abyssal, solar, medallion, halberd, atos, dust;
-        private static bool chase;
+        private static bool chase => Game.IsKeyDown(hkCombo.GetValue<KeyBind>().Key);
         private static readonly uint[] Quilldmg = { 20, 40, 60, 80 };
         private static readonly Menu Menu = new Menu("Bristleback", "bristle", true);
+        private static MenuItem hkCombo;
         static void Main(string[] args)
         {
             Game.OnUpdate += Game_OnUpdate;
-            Game.OnWndProc += Game_OnWndProc;
             Game.PrintMessage("BristlebackSharp by <font color='#ff1111'>Spyware293</font> Loaded !!");
             var menu_utama = new Menu("Options", "opsi");
-            menu_utama.AddItem(new MenuItem("Quill", "Quill").SetValue(new StringList(new[] { "Max", "Smart", "Disable","Farm" })));
+            menu_utama.AddItem(new MenuItem("Quill", "Quill").SetValue(new StringList(new[] { "Max", "Smart", "Disable", "Farm" })));
             menu_utama.AddItem(new MenuItem("enable", "enable").SetValue(true));
+            hkCombo = new MenuItem("hkCombo", "Combo key").SetValue(new KeyBind(32, KeyBindType.Press));
+            menu_utama.AddItem(hkCombo);
             Menu.AddSubMenu(menu_utama);
             Menu.AddToMainMenu();
-        }
-        private static void Game_OnWndProc (WndEventArgs args)
-        {
-            if (!Game.IsChatOpen)
-            {
-                if (Game.IsKeyDown(32))
-                {
-                    chase = true;
-                }
-                else
-                {
-                    chase = false;
-                }
-            }
         }
         private static float GetDistance2D(Vector3 hero, Vector3 enemy)
         {
@@ -48,8 +36,8 @@ namespace Bristleback_Sharp
         public static void Game_OnUpdate(EventArgs args)
         {
             _source = ObjectManager.LocalHero;
-           
-            if (!Game.IsInGame||Game.IsPaused||Game.IsWatchingGame)
+
+            if (!Game.IsInGame || Game.IsPaused || Game.IsWatchingGame)
             {
                 return;
             }
@@ -97,10 +85,10 @@ namespace Bristleback_Sharp
             }
             if (Menu.Item("Quill").GetValue<StringList>().SelectedIndex == 3 && Quill.CanBeCasted() && _source.CanCast() && Utils.SleepCheck("quill") && !_source.IsChanneling() && !_source.IsInvisible())
             {
-                
+
                 foreach (var x in _creep)
                 {
-                    if (x.Team == _source.GetEnemyTeam() && x.Health > 0 && x.Health < (Quilldmg[Quill.Level-1] * (1-x.DamageResist)+20) && GetDistance2D(x.Position, _source.Position) < Quill.CastRange && Utils.SleepCheck("quill"))
+                    if (x.Team == _source.GetEnemyTeam() && x.Health > 0 && x.Health < (Quilldmg[Quill.Level - 1] * (1 - x.DamageResist) + 20) && GetDistance2D(x.Position, _source.Position) < Quill.CastRange && Utils.SleepCheck("quill"))
                     {
                         Quill.UseAbility();
                         Utils.Sleep(150 + Game.Ping, "quill");
@@ -122,7 +110,7 @@ namespace Bristleback_Sharp
                         Utils.Sleep(150 + Game.Ping, "quill");
                     }
                 }
-                
+
             }
             if (chase && Menu.Item("enable").GetValue<bool>())
             {
@@ -173,7 +161,7 @@ namespace Bristleback_Sharp
                                 _source.Attack(_target);
                                 Utils.Sleep(Game.Ping + 150, "atk");
                             }
-			   
+
 
                         }
                         else
@@ -195,8 +183,8 @@ namespace Bristleback_Sharp
                 }
                 else
                 {
-                    if(Utils.SleepCheck("atk"))
-                    _source.Attack(_target);
+                    if (Utils.SleepCheck("atk"))
+                        _source.Attack(_target);
                     Utils.Sleep(1000, "atk");
                 }
             }
