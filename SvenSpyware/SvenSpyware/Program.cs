@@ -11,7 +11,7 @@ namespace SvenSpyware
     internal class Program
     {
         private static Ability stun, armor, ulti;
-        private static Item Lompat, armlet, mjollnir, mom, medallion, solar, soulRing, dust, bladeMail, bkb, abyssal,bloodthorn;
+        private static Item Lompat, armlet, mjollnir, medallion, solar, soulRing, dust, bladeMail, bkb, abyssal,bloodthorn;
         private static readonly Menu Menu = new Menu("SvenRampage", "SvenRampage", true, "npc_dota_hero_sven", true);
         private static Hero me, target;
         private static bool combo;
@@ -59,8 +59,6 @@ namespace SvenSpyware
                 dust = me.FindItem("item_dust");
             if (bladeMail == null)
                 bladeMail = me.FindItem("item_blade_mail");
-            if (mom == null)
-                mom = me.FindItem("item_mask_of_madness");
             if (medallion == null)
                 medallion = me.FindItem("item_medallion_of_courage");
             if (solar == null)
@@ -93,11 +91,6 @@ namespace SvenSpyware
                         {
                             bloodthorn.UseAbility(target);
                             Utils.Sleep(150 + Game.Ping, "bloodthorn");
-                        }
-                        if (mom != null && mom.CanBeCasted() && Utils.SleepCheck("mom"))
-                        {
-                            mom.UseAbility();
-                            Utils.Sleep(150 + Game.Ping, "mom");
                         }
 
                         if (armlet != null && armlet.CanBeCasted() && Utils.SleepCheck("armlet1") && !armlet.IsToggled)
